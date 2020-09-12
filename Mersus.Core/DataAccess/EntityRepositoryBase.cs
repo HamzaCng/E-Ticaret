@@ -27,16 +27,7 @@ namespace Mersus.Core.DataAccess
         public virtual int Count()
         {
             return _context.Set<T>().Count();
-        }
-        public virtual IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties)
-        {
-            IQueryable<T> query = _context.Set<T>();
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-            return query.AsEnumerable();
-        }
+        }       
 
         public T GetSingle(int id)
         {
@@ -46,18 +37,7 @@ namespace Mersus.Core.DataAccess
         public T GetSingle(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().FirstOrDefault(predicate);
-        }
-
-        public T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
-        {
-            IQueryable<T> query = _context.Set<T>();
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-
-            return query.Where(predicate).FirstOrDefault();
-        }
+        }       
 
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
         {
@@ -90,10 +70,6 @@ namespace Mersus.Core.DataAccess
                 _context.Entry<T>(entity).State = EntityState.Deleted;
             }
         }
-
-        public virtual void Commit()
-        {
-            _context.SaveChanges();
-        }
+        
     }
 }
