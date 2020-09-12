@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mersus.DataAccess.Migrations
 {
     [DbContext(typeof(MersusContext))]
-    [Migration("20200911204209_initial_migration")]
+    [Migration("20200912172621_initial_migration")]
     partial class initial_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace Mersus.DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -38,6 +41,8 @@ namespace Mersus.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -185,6 +190,11 @@ namespace Mersus.DataAccess.Migrations
 
             modelBuilder.Entity("Mersus.Entities.Models.Basket", b =>
                 {
+                    b.HasOne("Mersus.Entities.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Mersus.Entities.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")

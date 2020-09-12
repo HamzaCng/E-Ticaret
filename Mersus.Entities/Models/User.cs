@@ -13,6 +13,7 @@ namespace Mersus.Entities.Models
         public string Password { get; set; }
         public string Address { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
         public Status UserStatus { get; set; }
     }
 }

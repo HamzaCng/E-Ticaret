@@ -12,12 +12,10 @@ namespace Mersus.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        IUserRepo _userRepository;
+        private readonly ILogger<HomeController> _logger;     
       
-        public HomeController(ILogger<HomeController> logger, IUserRepo userRepository)
-        {
-             _userRepository = userRepository;
+        public HomeController(ILogger<HomeController> logger)
+        {             
             _logger = logger;
         }
 
@@ -37,10 +35,6 @@ namespace Mersus.WebUI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public IActionResult GetUsers()
-        {
-            return Json(_userRepository.GetAll());
-        }
+      
     }
 }

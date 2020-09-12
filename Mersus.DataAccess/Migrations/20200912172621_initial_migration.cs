@@ -110,11 +110,18 @@ namespace Mersus.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
+                    OrderId = table.Column<int>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Baskets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Baskets_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Baskets_Products_ProductId",
                         column: x => x.ProductId,
@@ -128,6 +135,11 @@ namespace Mersus.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Baskets_OrderId",
+                table: "Baskets",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Baskets_ProductId",
