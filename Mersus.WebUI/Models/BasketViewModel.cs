@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Mersus.Entities.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Mersus.Entities.Models
+namespace Mersus.WebUI.Models
 {
-    public class Basket : IEntityBase
-    {        
+    public class BasketViewModel
+    {
         public int Id { get; set; }
         public int UserId { get; set; }
         public int ProductId { get; set; }
