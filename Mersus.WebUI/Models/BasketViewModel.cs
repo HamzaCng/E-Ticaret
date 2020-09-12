@@ -15,5 +15,6 @@ namespace Mersus.WebUI.Models
         public Product Product { get; set; }
         public Order Order { get; set; }
         public DateTime CreatedDate { get; set; }
+        public Basket Basket { get; set; }
     }
 }
